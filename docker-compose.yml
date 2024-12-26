@@ -6,6 +6,7 @@ services:
     build: # Dockerfileで設定する
       context: .
       dockerfile: ./docker/php/Dockerfile
+    platform: linux/amd64
     volumes:
       - ./src:/var/www/html
       - ./docker/php/php.ini:/usr/local/etc/php/php.ini
@@ -13,6 +14,7 @@ services:
     build: # Dockerfileで設定する
       context: .
       dockerfile: ./docker/nginx/Dockerfile
+    platform: linux/amd64
     ports:
       - "8080:80"
     volumes:
@@ -25,6 +27,7 @@ services:
     build: # Dockerfileで設定する
       context: .
       dockerfile: ./docker/mysql/Dockerfile
+    platform: linux/amd64
     environment:
       - MYSQL_ROOT_PASSWORD=root
       - MYSQL_DATABASE=posse
@@ -36,6 +39,7 @@ services:
   # PHPMyAdminサーバー
   phpmyadmin: # デフォルトのままで不都合ないのでDockerHubにあるイメージをそのまま使う
     image: phpmyadmin/phpmyadmin:latest
+    platform: linux/amd64
     environment:
       PMA_HOST: 'db' # ホストはデータベースサーバーのサービス名(26行目)
       PMA_USER: 'root' # デフォルトでログインしているユーザー(今回はルートユーザー)
@@ -47,6 +51,7 @@ services:
   # 外部にメール送るにはIPアドレスの許可やらその他いろいろ面倒くさいので今回はやらない。
   mailhog:
     image: mailhog/mailhog
+    platform: linux/amd64
     ports:
       - 8025:8025
       - 1025:1025

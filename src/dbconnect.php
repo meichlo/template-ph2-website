@@ -1,0 +1,1 @@
+これはdbconnent.phpファイルです
